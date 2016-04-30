@@ -107,14 +107,8 @@ angular.module('starter.controllers', [])
             fs.root.getFile('test.txt', {create: false}, function(fileEntry) {
               fileEntry.createWriter(function(fileWriter) {
                 console.log("3333");
-                // window.BlobBuilder = window.BlobBuilder || window.WebKitBlobBuilder; 
-                // console.log("4444");
-                // var bb = new BlobBuilder();
-                // console.log("5555");
-                // bb.append('Filesystem API is awesome!');
-
-
-                var blob = new Blob(['Filesystem API is awesome!']);
+                
+                var blob = new Blob(['Filesystem API is awesome!'], {type: 'text/plain' });
 
                 fileWriter.write(blob); 
                 console.log("6666");
