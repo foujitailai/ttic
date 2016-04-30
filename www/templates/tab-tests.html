@@ -1,0 +1,16 @@
+<ion-view view-title="Tests">
+  <ion-content>
+    <ion-list>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="test in tests" type="item-text-wrap" href="#/tab/tests/{{test.id}}" ng-click="todoTest(test)">
+        <!-- <img ng-src="{{test.face}}"> -->
+        <h2>{{test.name}}</h2>
+        <p>{{test.lastText}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+
+        <ion-option-button class="button-assertive" ng-click="todoTest(test)">
+          Run
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
