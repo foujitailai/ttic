@@ -25,7 +25,7 @@ app.get('/tests', function(req, res){
 });
 
 // create
-app.post('/tests', urlencodedParser, function(req, res){
+app.post('/tests', function(req, res){
   fs.readFile(__dirname + '/data/tests.json', 'utf8', function(err, data){
     if (err){
       res.status(500).end();
@@ -39,7 +39,7 @@ app.post('/tests', urlencodedParser, function(req, res){
       return console.log(e);
     }
 
-    var content = JSON.parse(req.body.content)
+    var content = req.body
     for(var i=0; i < data.length; i++) {
       var note = data[i];
       if (note.id == content.id){
@@ -61,8 +61,7 @@ app.post('/tests', urlencodedParser, function(req, res){
 });
 
 // update
-app.put('/tests:id', function(req, res){
-  console.log("uuuuuuuuuuuuuuu");
+app.put('/tests/:id', function(req, res){
   fs.readFile(__dirname + '/data/tests.json', 'utf8', function(err, data){
     if (err){
       res.status(500).end();
@@ -77,7 +76,7 @@ app.put('/tests:id', function(req, res){
     }
 
     data.forEach(function(note, index){
-      if (node.id == req.params.id){
+      if (note.id == req.params.id){
         data[index] = req.body;
       }
     });
@@ -93,8 +92,7 @@ app.put('/tests:id', function(req, res){
 });
 
 // delete
-app.delete('/tests:id', function(req, res){
-  console.log("ddddddddddddddddd");
+app.delete('/tests/:id', function(req, res){
   fs.readFile(__dirname + '/data/tests.json', 'utf8', function(err, data){
     if (err){
       res.status(500).end();
@@ -110,7 +108,7 @@ app.delete('/tests:id', function(req, res){
 
     var targetIndex = -1;
     data.forEach(function(note, index){
-      if (node.id == req.params.id){
+      if (note.id == req.params.id){
         targetIndex = index;
       }
     });
@@ -123,7 +121,7 @@ app.delete('/tests:id', function(req, res){
           res.status(500).end();
           return console.log(err);
         }
-        res.status(204).send(data);
+        res.status(204).end();
       })
     }
     else {

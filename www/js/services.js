@@ -170,10 +170,34 @@ angular.module('starter.services', ['starter.controllers'])
     }
   }, {
     id: 4,
-    name: 'test name',
-    lastText: 'detail',
+    name: 'server create',
+    lastText: 'check data/tests.json',
     face: 'img/mike.png',
-    testFun: function(){alert("4");}
+    testFun: function(){
+      $http.post('/tests', {id:5,name:"new test",lastText:"it created by http",face:"img/perry.png"}).success(function (data) {
+        alert(data);
+      })
+    }
+  }, {
+    id: 6,
+    name: 'server delete',
+    lastText: 'check data/tests.json',
+    face: 'img/mike.png',
+    testFun: function(){
+      $http.delete('/tests/' + 5).success(function (data) {
+        alert(data);
+      })
+    }
+  }, {
+    id: 5,
+    name: 'server update',
+    lastText: 'check data/tests.json',
+    face: 'img/mike.png',
+    testFun: function(){
+      $http.put('/tests/' + 5, {id:5,name:"modify",lastText:"modify2",face:"img/perry.png"}).success(function (data) {
+        alert(data);
+      })
+    }
   }];
 
   return {
